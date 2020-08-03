@@ -27,46 +27,74 @@
           <!-- REGISTER CARD -->
           
           <mat-tab label="Registrati">
-
-            <mat-form-field class="example-full-width">
-              <mat-label>Nome</mat-label>
-              <input type="nome" matInput placeholder="Nome" [(ngModel)]="rnome">
-              <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-form-field class="example-full-width" style="width: 100%">
+              <input matInput placeholder="Name" [formControl]="regnome">
+              <mat-error *ngIf="regnome.hasError('required')">
+                Il campo Nome va <strong>compilato</strong>
+              </mat-error>
+            <mat-icon matSuffix>account_circle</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Cognome</mat-label>
-              <input type="cognome" matInput placeholder="Cognome" [(ngModel)]="rcognome">
+              <input type="cognome" matInput placeholder="Cognome" [formControl]="regcognome">
+              <mat-error *ngIf="regcognome.hasError('required')">
+                Il campo cognome va <strong>compilato</strong>
+              </mat-error>
               <mat-icon matSuffix>account_circle</mat-icon>
             </mat-form-field>
 
               <mat-form-field class="example-full-width">
                 <mat-label>Username</mat-label>
-                <input type="username" matInput placeholder="username" value="" [(ngModel)]="rusername">
+                <input type="username" matInput placeholder="username" value="" [formControl]="regusername">
+                <mat-error *ngIf="regusername.hasError('required')">
+                  Il campo username va <strong>compilato</strong>
+                </mat-error>
+                <mat-error *ngIf="regusername.hasError('minlength')">
+                  L'username deve essere almeno di 5 caratteri
+                </mat-error>
                 <mat-icon matSuffix>account_circle</mat-icon>
               </mat-form-field>
   
             <mat-form-field class="example-full-width">
               <mat-label>Password</mat-label>
-              <input type="password" matInput placeholder="Password" [(ngModel)]="rpassword">
+              <input type="password" matInput placeholder="Password" value="" [formControl]="regpassword">
+              <mat-error *ngIf="regpassword.hasError('required')">
+                Il campo password va <strong>compilato</strong>
+              </mat-error>
+              <mat-error *ngIf="regpassword.hasError('minlength')">
+                La password deve essere almeno di 6 caratteri
+              </mat-error>
               <mat-icon matSuffix>vpn_key</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Email</mat-label>
-              <input type="email" matInput placeholder="Email" value="" [(ngModel)]="remail">
+              <input type="email" matInput placeholder="Email" [formControl]="regemail">
+              <mat-error *ngIf="regemail.hasError('required')">
+                Il campo email va <strong>compilato</strong>
+              </mat-error>
               <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Città</mat-label>
-              <input type="Citta" matInput placeholder="Citta" value="" [(ngModel)]="rcitta">
+              <input type="Citta" matInput placeholder="Citta" value="" [formControl]="regcitta">
+              <mat-error *ngIf="regcitta.hasError('required')">
+                Il campo città va <strong>compilato</strong>
+              </mat-error>
               <mat-icon matSuffix>location_city</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Telefono</mat-label>
-              <input type="Telefono" matInput placeholder="Telefono" value="" [(ngModel)]="rtelefono">
+              <input type="Telefono" matInput placeholder="Telefono" value="" [formControl]="regtelefono">
+              <mat-error *ngIf="regtelefono.hasError('required')">
+                Il campo telefono va <strong>compilato</strong>
+              </mat-error>
+              <mat-error *ngIf="regtelefono.errors.pattern">
+                Il numero di telefono non è valido
+              </mat-error>
               <mat-icon matSuffix>phone</mat-icon>
             </mat-form-field>
             
