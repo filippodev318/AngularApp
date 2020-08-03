@@ -12,27 +12,29 @@ export class LoginRegComponent implements OnInit {
 
 
   email:String;
+  rusername:String;
   password:String;
   remail:String;
   rpassword:String;
-  rcpassword:String;
   rnome:String;
   rcognome:String;
   rcitta:String;
+  rtelefono:String;
 
   constructor(private snackBar:MatSnackBar, private http:HttpClient){
 
   }
   register() {
 
-    let url = "https://jsonplaceholder.typicode.com/posts"
+    let url = "http://127.0.0.1:5000/register"
     this.http.post(url,{
-      remail:this.remail,
-      rpassword:this.rpassword,
-      rcpassword:this.rcpassword,
-      rnome:this.rnome,
-      rcognome:this.rcognome,
-      rcitta:this.rcitta
+      email:this.remail,
+      username:this.rusername,
+      password:this.rpassword,
+      nome:this.rnome,
+      cognome:this.rcognome,
+      citta:this.rcitta,
+      telefono:this.rtelefono
 
     }).toPromise().then((data: any) => {
       console.log(data)
