@@ -11,27 +11,27 @@ import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 export class LoginRegComponent implements OnInit {
 
   regForm = new FormGroup({
-    regusername:new FormControl("", [
+    username:new FormControl("", [
       Validators.required,
       Validators.minLength(5)
     ]),
-    regemail:new FormControl("", [
+    email:new FormControl("", [
       Validators.required
     ]),
-    regpassword:new FormControl("", [
+    password:new FormControl("", [
       Validators.required,
       Validators.minLength(6)
     ]),
-    regnome:new FormControl("", [
+    nome:new FormControl("", [
       Validators.required
     ]),
-    regcognome:new FormControl("", [
+    cognome:new FormControl("", [
       Validators.required
     ]),
-    regcitta:new FormControl("", [
+    citta:new FormControl("", [
       Validators.required
     ]),
-    regtelefono:new FormControl("", [
+    telefono:new FormControl("", [
       Validators.required,
       Validators.pattern("[0-9 ]{10}")
     ])
@@ -49,38 +49,29 @@ export class LoginRegComponent implements OnInit {
   }
 
   getErrorMessage() {
-    if (this.regForm.get('regemail').hasError('required')) 
+    if (this.regForm.get('email').hasError('required')) 
       return 'Il campo email va compilato';
     }
 
   register(regForm) {
 
-<<<<<<< HEAD
-    //let url = "http://127.0.0.1:5000/register"
-    let url = "http://httpbin.org/post"
-    if(regForm.valid){
-    this.http.post(url,regForm.value).toPromise().then((data: any) => {
-=======
     let url = "http://127.0.0.1:5000/register"
     //let url = "http://httpbin.org/post"
-    this.http.post(url,{
-      email:this.regemail,
-      username:this.regusername,
-      password:this.regpassword,
-      nome:this.regnome,
-      cognome:this.regcognome,
-      citta:this.regcitta,
-      telefono:this.regtelefono
-
-    }).toPromise().then((data: any) => {
->>>>>>> e3cc5eec9f21e7e079b5a73fb34b105ba28427ae
+    if(regForm.valid){
+    this.snackBar.open('Registrazione in corso.... !!','',{duration:10000})
+    this.http.post(url,regForm.value).toPromise().then((data: any) => {
       console.log(data)
-      console.log(JSON.stringify(data))
+      console.log(data)
+      console.log(data["response"])
+      console.log(data["response"]["user"]["authentication_token"])
+      console.log(data["response"]["user"]["id"])
+      this.snackBar.open('Registrazione avvenuta con successo !!','',{duration:10000})
+      regForm.reset()
     })
-    this.snackBar.open('Registrazione avvenuta con successo !!','',{duration:1000})
+    
   }
 
-  regForm.reset()
+  
    
   }
   
