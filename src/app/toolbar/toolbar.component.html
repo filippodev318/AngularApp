@@ -6,5 +6,6 @@
     <span class="spacer-elem"></span>
     <a routerLink="/aroundme" routerLinkActive="active">AroundMe</a>
     <span class="spacer-elem"></span>
-    <a routerLink="/login_reg" routerLinkActive="active">Login/SignUp</a>
+    <a routerLink="/login_reg" routerLinkActive="active" *ngIf="!isLoggedIn$">Login/SignUp</a>
+    <a routerLink="/profile" routerLinkActive="active" *ngIf="isLoggedIn$">Profile</a>
 </mat-toolbar>

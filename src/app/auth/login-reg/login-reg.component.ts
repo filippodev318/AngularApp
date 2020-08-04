@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http'
 import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
@@ -51,7 +52,11 @@ export class LoginRegComponent implements OnInit {
   email:String;
   password:String; 
 
-  constructor(private Auth: AuthService, private snackBar:MatSnackBar, private http:HttpClient){
+  constructor(
+    private router: Router,
+    private Auth: AuthService, 
+    private snackBar:MatSnackBar, 
+    private http:HttpClient){
   }
   
 
@@ -129,10 +134,10 @@ export class LoginRegComponent implements OnInit {
       this.Auth.login(logForm.get('email').value, logForm.get('password').value).subscribe(
         data => {
           console.log('login_reg data: ', data);
-          //.router.navigate(['admin'])
           this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
           this.Auth.setId(data["response"]["user"]["id"]);
           this.Auth.setLoggedIn(true);
+          this.router.navigate(['home'])
           console.log(this.Auth.getAuthenticationToken());
           console.log(this.Auth.getId());
           
