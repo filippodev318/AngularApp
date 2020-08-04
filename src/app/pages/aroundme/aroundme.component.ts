@@ -24,6 +24,7 @@ export class AroundmeComponent implements OnInit  {
 
   }
 
+
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
@@ -38,6 +39,7 @@ export class AroundmeComponent implements OnInit  {
     this.cards.forEach(card => {
       console.log(card)
     });
+    
   }
   
   markerDragEnd( $event: MouseEvent) {
