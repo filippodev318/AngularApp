@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { equal } from 'assert';
 
 @Component({
   selector: 'app-events',
@@ -8,40 +10,59 @@ import { Component, OnInit } from '@angular/core';
 export class EventsComponent implements OnInit {
 
   cards = [
-    {
-      title: 'Card Title 1',
-      subtitle:'Card SubTitle1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://material.angular.io/assets/img/examples/shiba2.jpg'
-    },
-    {
-      title: 'Card Title 2',
-      subtitle:'Card SubTitle2',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://material.angular.io/assets/img/examples/shiba2.jpg'
-    },
-    {
-      title: 'Card Title 3',
-      subtitle:'Card SubTitle1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://material.angular.io/assets/img/examples/shiba2.jpg'
-    },
-    {
-      title: 'Card Title 4',
-      subtitle:'Card SubTitle1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://material.angular.io/assets/img/examples/shiba2.jpg'
-    },
-
   ];
+  button_text='Partecipa';
+  id_user=28
+  
+  constructor(private http:HttpClient) { 
 
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
+  click(id : String) : void{
+    this.cards.forEach(card => {
+      console.log(card)
+      if (card.id == id){
+        if (card.button_text==='Non Partecipare')
+        {
+          var url="http://127.0.0.1:5000/dispartecipa/"
+          card.button_text='Partecipa'
+          let index=card.id_partecipanti.indexOf(this.id_user)
+          if (index !== -1) {
+            card.id_partecipanti.splice(index, 1);
+          }
+        }
+        else
+        {
+          var url="http://127.0.0.1:5000/partecipa/"
+          card.button_text='Non Partecipare'
+          card.id_partecipanti.push(this.id_user)
+        }
+        
+        this.http.get(url+id,{
+        }).toPromise().then((data: any) => {
+          console.log(this.cards)
+          console.log(JSON.stringify(this.cards))
+        });
+      }
+    });
+  }
+
+
+  ngOnInit(): void {
+    let url = "http://127.0.0.1:5000/events"
+    this.http.get(url,{
+    }).toPromise().then((data: any) => {
+      this.cards=data
+      this.cards.forEach(card => {
+        if (card.id_partecipanti.some(e => e === this.id_user)){
+          card.button_text='Non Partecipare'
+        }
+        else{
+          card.button_text='Partecipa'
+        }
+      });
+      console.log(this.cards)
+      console.log(JSON.stringify(this.cards))
+    })
+  }
 }
