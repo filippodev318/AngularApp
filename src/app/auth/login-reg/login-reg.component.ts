@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http'
 import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import {AuthService} from '../../_service/auth-service'
 
 @Component({
   selector: 'app-login-reg',
@@ -50,8 +51,7 @@ export class LoginRegComponent implements OnInit {
   email:String;
   password:String; 
 
-  constructor(private snackBar:MatSnackBar, private http:HttpClient){
-
+  constructor(private Auth: AuthService, private snackBar:MatSnackBar, private http:HttpClient){
   }
   
 
@@ -114,8 +114,6 @@ export class LoginRegComponent implements OnInit {
     })
     
   }
-
-  
    
   }
   
@@ -124,9 +122,17 @@ export class LoginRegComponent implements OnInit {
     //let url = "http://httpbin.org/post"
 
     if(logForm.valid){
-      this.http.post(url,logForm.value).toPromise().then((data:any) =>{
-        console.log(data)
+      
+      this.Auth.login(logForm.get('email'),logForm.get('password')).subscribe(data => {
+        
+          console.log(data)
+          //this.router.navigate(['admin'])
+          this.Auth.setLoggedIn(true)
+        
       })
+      //this.http.post(url,logForm.value).toPromise().then((data:any) =>{
+        //console.log(data)
+      //})
     }
 
   }
