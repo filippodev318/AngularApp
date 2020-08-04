@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EventsRoutingModule } from './events-routing.module';
-import { EventsComponent } from './events.component';
+import { CreateeventRoutingModule } from './createevent-routing.module';
+import { CreateeventComponent } from './createevent.component';
 import { MaterialModule } from '../../material/material.module';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
-  declarations: [EventsComponent],
+  declarations: [CreateeventComponent],
   imports: [
     CommonModule,
-    EventsRoutingModule,
+    CreateeventRoutingModule,
     MaterialModule,
     HttpClientModule
   ]
 })
-export class EventsModule { }
+export class CreateeventModule { }
