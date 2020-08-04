@@ -24,6 +24,7 @@ export class LoginRegComponent implements OnInit {
   constructor(private snackBar:MatSnackBar, private http:HttpClient){
 
   }
+  
   register() {
 
     let url = "http://127.0.0.1:5000/register"
@@ -42,6 +43,7 @@ export class LoginRegComponent implements OnInit {
     })
 
   }
+  
   login() {
     if(this.email=="admin" && this.password=="admin"){
         this.snackBar.open('Login Successful','',{duration:1000})

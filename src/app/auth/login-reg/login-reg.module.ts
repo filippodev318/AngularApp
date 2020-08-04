@@ -6,7 +6,6 @@ import { LoginRegComponent } from './login-reg.component';
 import { MaterialModule } from '../../material/material.module'
 import {HttpClientModule} from '@angular/common/http'
 
-
 @NgModule({
   declarations: [LoginRegComponent],
   imports: [
