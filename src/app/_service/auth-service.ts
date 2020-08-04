@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { catchError, map, tap } from 'rxjs/operators';
 
 interface myData {
     success: boolean,
@@ -9,29 +10,40 @@ interface myData {
 @Injectable()
 export class AuthService {
 
-  private loggedInStatus = false
+  private loggedInStatus = false;
+  private authenticationToken = '';
+  private id = -1;
+  
 
   constructor(private http: HttpClient) { }
 
   setLoggedIn(value: boolean) {
-    this.loggedInStatus = value
+    this.loggedInStatus = value;
   }
 
   get isLoggedIn() {
-    return this.loggedInStatus
+    return this.loggedInStatus;
   }
 
-  getUserDetails(email, password) {
-    // post these details to API server return user info if correct
-    return this.http.post('http://127.0.0.1:5000/login', {
-      email,
-      password
-    })
+  setAuthenticationToken(value:string):void{
+    this.authenticationToken=value;
   }
 
-  login(email,password){
-      let url = 'http://127.0.0.1:5000/login'
-       return this.http.post(url,{email,password})
+  getAuthenticationToken():string{
+    return this.authenticationToken;
+  }
+
+  setId(value:number):void{
+    this.id=value;
+  }
+
+  getId():number{
+    return this.id;
+  }
+
+  login(email, password) {
+    //console.log(email, password );
+    return this.http.post('http://127.0.0.1:5000/login', {email, password});
   }
 
 }

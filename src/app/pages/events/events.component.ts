@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { equal } from 'assert';
+import {AuthService} from '../../_service/auth-service';
 
 @Component({
   selector: 'app-events',
@@ -14,7 +15,7 @@ export class EventsComponent implements OnInit {
   button_text='Partecipa';
   id_user=28
   
-  constructor(private http:HttpClient) { 
+  constructor(private Auth: AuthService,private http:HttpClient) { 
 
   }
 
@@ -50,9 +51,21 @@ export class EventsComponent implements OnInit {
 
   ngOnInit(): void {
     let url = "http://127.0.0.1:5000/events"
-    this.http.get(url,{
-    }).toPromise().then((data: any) => {
+    //let headers = new Headers();
+    //headers.append('Content-Type', 'application/json');
+    //headers.append('authentication', '${this.Auth.getAuthenticationToken()}');
+    //console.log(headers)
+    let headers = {
+        'Cache-Control': 'no-cache',
+        'Cache-Content-Type': 'application/json',
+        'authentication_token': this.Auth.getAuthenticationToken()
+      }
+      
+    console.log(headers)
+    this.http.get(url,{headers:headers }).toPromise()
+    .then((data: any) => {
       this.cards=data
+      console.log(data)
       this.cards.forEach(card => {
         if (card.id_partecipanti.some(e => e === this.id_user)){
           card.button_text='Non Partecipare'

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http'
 import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
-import {AuthService} from '../../_service/auth-service'
+import {AuthService} from '../../_service/auth-service';
 
 @Component({
   selector: 'app-login-reg',
@@ -121,15 +121,27 @@ export class LoginRegComponent implements OnInit {
     let url = "http://127.0.0.1:5000/login"
     //let url = "http://httpbin.org/post"
 
+    console.log('login-reg fuori if')
     if(logForm.valid){
-      
-      this.Auth.login(logForm.get('email'),logForm.get('password')).subscribe(data => {
-        
-          console.log(data)
-          //this.router.navigate(['admin'])
-          this.Auth.setLoggedIn(true)
-        
-      })
+      console.log('login-reg dentro if')
+      console.log('email e passw',logForm.get('email').value, logForm.get('password').value)
+
+      this.Auth.login(logForm.get('email').value, logForm.get('password').value).subscribe(
+        data => {
+          console.log('login_reg data: ', data);
+          //.router.navigate(['admin'])
+          this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
+          this.Auth.setId(data["response"]["user"]["id"]);
+          this.Auth.setLoggedIn(true);
+          console.log(this.Auth.getAuthenticationToken());
+          console.log(this.Auth.getId());
+          
+        },
+
+        error => {
+          console.log(error)
+        }
+      )
       //this.http.post(url,logForm.value).toPromise().then((data:any) =>{
         //console.log(data)
       //})

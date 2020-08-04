@@ -11,8 +11,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
+
+import { AuthService } from './_service/auth-service';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
@@ -31,7 +35,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
