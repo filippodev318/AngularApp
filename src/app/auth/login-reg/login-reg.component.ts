@@ -10,6 +10,16 @@ import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 })
 export class LoginRegComponent implements OnInit {
 
+  logForm = new FormGroup({
+    email:new FormControl("", [
+      Validators.required
+    ]),
+    password:new FormControl("", [
+      Validators.required,
+      Validators.minLength(6)
+    ])
+  })
+
   regForm = new FormGroup({
     username:new FormControl("", [
       Validators.required,
@@ -48,24 +58,58 @@ export class LoginRegComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getErrorMessage() {
+  nameErrorMessage() {
+    if (this.regForm.get('nome').hasError('required')) 
+      return 'Il campo nome va compilato';
+  }
+
+  cognomeErrorMessage(){
+    if (this.regForm.get('cognome').hasError('required')) 
+      return 'Il campo cognome va compilato';
+  }
+
+  usernameErrorMessage(){
+    if (this.regForm.get('username').hasError('required')) 
+      return 'Il campo username va compilato';
+    if (this.regForm.get('username').hasError('minlength')) 
+      return " L'username deve essere almeno di 5 caratteri";
+  }
+  
+  pwdErrorMessage(){
+    if (this.logForm.get('password').hasError('required'))
+      return 'Inserisci la password' 
+    if (this.regForm.get('password').hasError('required')) 
+      return " Il campo password va compilato ";    
+    if (this.regForm.get('password').hasError('minlength')) 
+      return " La password deve essere almeno di 6 caratteri";
+  }
+   
+  emailErrorMessage(){
+    if (this.logForm.get('email').hasError('required'))
+      return " Inserisci l'email " 
     if (this.regForm.get('email').hasError('required')) 
       return 'Il campo email va compilato';
-    }
+  }
+
+  phoneErrorMessage(){
+    if (this.regForm.get('telefono').hasError('pattern')) 
+      return 'Numero di telefono non valido';  
+  }
+
 
   register(regForm) {
 
     let url = "http://127.0.0.1:5000/register"
     //let url = "http://httpbin.org/post"
     if(regForm.valid){
-    this.snackBar.open('Registrazione in corso.... !!','',{duration:10000})
+    this.snackBar.open('Registrazione in corso.... !!','',{duration:1500})
     this.http.post(url,regForm.value).toPromise().then((data: any) => {
       console.log(data)
       console.log(data)
       console.log(data["response"])
       console.log(data["response"]["user"]["authentication_token"])
       console.log(data["response"]["user"]["id"])
-      this.snackBar.open('Registrazione avvenuta con successo !!','',{duration:10000})
+      this.snackBar.open('Registrazione avvenuta con successo !!','',{duration:2000})
       regForm.reset()
     })
     
@@ -75,12 +119,16 @@ export class LoginRegComponent implements OnInit {
    
   }
   
-  login() {
-    if(this.email=="admin" && this.password=="admin"){
-        this.snackBar.open('Login Successful','',{duration:1000})
-    }else{
-      this.snackBar.open('Login error','',{duration:1000})
+  login(logForm) {
+    let url = "http://127.0.0.1:5000/login"
+    //let url = "http://httpbin.org/post"
+
+    if(logForm.valid){
+      this.http.post(url,logForm.value).toPromise().then((data:any) =>{
+        console.log(data)
+      })
     }
+
   }
 
 }

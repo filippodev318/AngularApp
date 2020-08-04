@@ -10,18 +10,22 @@
       <mat-card-content>
         <mat-tab-group>
           <mat-tab label="Login">
+            <form [formGroup]="logForm">
             <mat-form-field class="example-full-width">
               <mat-label>Email</mat-label>
-              <input type="email" matInput placeholder="Email" value="" [(ngModel)]="email">
+              <input type="email" matInput placeholder="Email" value="" formControlName="email" required>
+              <mat-error>{{emailErrorMessage()}}</mat-error>
               <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
   
             <mat-form-field class="example-full-width">
               <mat-label>Password</mat-label>
-              <input type="password" matInput placeholder="Password" [(ngModel)]="password">
+              <input type="password" matInput placeholder="Password" formControlName="password" required>
+              <mat-error>{{pwdErrorMessage()}}</mat-error>
               <mat-icon matSuffix>vpn_key</mat-icon>
             </mat-form-field>
-            <button mat-button color="primary" (click)="login()">Login</button>
+            <button mat-button color="primary" (click)="login(logForm)">Login</button>
+          </form>
           </mat-tab>
 
           <!-- REGISTER CARD -->
@@ -30,16 +34,14 @@
             <form [formGroup]="regForm">
             <mat-form-field class="example-full-width" style="width: 100%">
               <input matInput placeholder="Name" formControlName="nome" required>
-              <!--<mat-error *ngIf="regForm.regnome.hasError('required')">
-                Il campo Nome va <strong>compilato</strong>
-              </mat-error>-->
+              <mat-error>{{nameErrorMessage()}}</mat-error>
             <mat-icon matSuffix>account_circle</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Cognome</mat-label>
               <input type="cognome" matInput placeholder="Cognome" formControlName="cognome" required>
-
+              <mat-error>{{cognomeErrorMessage()}}</mat-error>
               <mat-icon matSuffix>account_circle</mat-icon>
             </mat-form-field>
 
@@ -47,11 +49,13 @@
                 <mat-label>Username</mat-label>
                 <input type="username" matInput placeholder="username" value="" formControlName="username" required minlength="4">
                 <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-error>{{usernameErrorMessage()}}</mat-error>
               </mat-form-field>
   
             <mat-form-field class="example-full-width">
               <mat-label>Password</mat-label>
               <input type="password" matInput placeholder="Password" value="" formControlName="password" required minlength="6">
+              <mat-error>{{pwdErrorMessage()}}</mat-error>
               <mat-icon matSuffix>vpn_key</mat-icon>
             </mat-form-field>
 
@@ -59,18 +63,19 @@
               <mat-label>Email</mat-label>
               <input type="email" matInput placeholder="Email" formControlName="email" required>
               <mat-icon matSuffix>email</mat-icon>
-              <mat-error>{{getErrorMessage()}}</mat-error>
+              <mat-error>{{emailErrorMessage()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Città</mat-label>
-              <input type="Citta" matInput placeholder="Citta" value="" formControlName="citta" required>
+              <input type="Citta" matInput placeholder="Citta" value="" formControlName="citta">
               <mat-icon matSuffix>location_city</mat-icon>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Telefono</mat-label>
-              <input type="Telefono" matInput placeholder="Telefono" value="" formControlName="telefono" required pattern="[0-9 ]{10}">
+              <input type="Telefono" matInput placeholder="Telefono" value="" formControlName="telefono" pattern="[0-9 ]{10}">
+              <mat-error>{{phoneErrorMessage()}}</mat-error>
               <mat-icon matSuffix>phone</mat-icon>
             </mat-form-field>
             
