@@ -16,11 +16,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
 import { AuthService } from './_service/auth-service';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
