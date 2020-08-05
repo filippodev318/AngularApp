@@ -29,18 +29,7 @@ export class AroundmeComponent implements OnInit  {
     console.log(`clicked the marker: ${label || index}`)
   }
   
-  mapClicked($event: MouseEvent) {
-    console.log($event)
-    this.cards.push({
-      latitudine: $event.coords.lat,
-      longitudine: $event.coords.lng,
-      draggable: true
-    });
-    this.cards.forEach(card => {
-      console.log(card)
-    });
-    
-  }
+
   
   markerDragEnd( $event: MouseEvent) {
     console.log('dragEnd', $event);
