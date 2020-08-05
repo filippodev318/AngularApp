@@ -17,6 +17,21 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 
 import { AuthService } from './_service/auth-service';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDcglH7K_WV9fF3a3pJqHrlndte8Nfspeg",
+  authDomain: "atns-a5a13.firebaseapp.com",
+  databaseURL: "https://atns-a5a13.firebaseio.com",
+  projectId: "atns-a5a13",
+  storageBucket: "atns-a5a13.appspot.com",
+  messagingSenderId: "919697256418",
+  appId: "1:919697256418:web:c440f0d1e53534840193bb",
+  measurementId: "G-YNVWLH0GP7"
+};
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +48,9 @@ import { AuthService } from './_service/auth-service';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    AngularFireModule.initializeApp(firebaseConfig), // aggiungi questa riga 
+    AngularFireStorageModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
