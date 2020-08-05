@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { catchError, map, tap } from 'rxjs/operators';
-
-interface myData {
-    success: boolean,
-    message: string
-  }
+import { Subject, Observable } from 'rxjs';
+import {EventEmitter} from '@angular/core';
 
 @Injectable()
 export class AuthService {
@@ -13,15 +9,18 @@ export class AuthService {
   private loggedInStatus = false;
   private authenticationToken = '';
   private id = -1;
-  
+  public onLoggedInStatus: EventEmitter<boolean> = new EventEmitter<boolean>();
+
 
   constructor(private http: HttpClient) { }
 
   setLoggedIn(value: boolean) {
+    this.onLoggedInStatus.emit(value);
+    console.log('evento emesso')
     this.loggedInStatus = value;
   }
 
-  get isLoggedIn() {
+  getisLoggedIn() {
     return this.loggedInStatus;
   }
 
