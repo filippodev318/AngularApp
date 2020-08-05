@@ -10,7 +10,8 @@ const routes: Routes = [
   {path: 'events', loadChildren: () => import('./pages/events/events.module').then(m => m.EventsModule) },
   {path: 'aroundme', loadChildren: () => import('./pages/aroundme/aroundme.module').then(m => m.AroundmeModule) },
   { path: 'login_reg', loadChildren: () => import('./auth/login-reg/login-reg.module').then(m => m.LoginRegModule) },
-  { path: 'createevent', loadChildren: () => import('./pages/createevent/createevent.module').then(m => m.CreateeventModule) }
+  { path: 'createevent', loadChildren: () => import('./pages/createevent/createevent.module').then(m => m.CreateeventModule) },
+  { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule)}
 ];
 
 @NgModule({

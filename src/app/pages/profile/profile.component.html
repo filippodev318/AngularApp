@@ -1,1 +1,46 @@
 <p>profile works!</p>
+<div class="center-content">
+<mat-card class="profile-card">
+
+        <!--<mat-card-title>PROFILO</mat-card-title>-->
+        <mat-card-header></mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+
+        <div class="example-button-row">
+            <button mat-raised-button color="primary">Cambia Immagine</button>
+        </div>
+
+        <mat-card-content>
+    
+        <mat-form-field class="example-full-width">
+            <mat-label>Nome</mat-label>
+            <input type="nome" matInput value="{{user.nome}}" readonly>
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Cognome</mat-label>
+            <input type="cognome" matInput value="{{user.cognome}}" readonly>
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput value="{{user.email}}" readonly>
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input type="username" matInput value="{{user.username}}" readonly>
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Citta</mat-label>
+            <input type="citta" matInput value="{{user.citta}}" readonly>
+            <mat-icon matSuffix>location_city</mat-icon>
+          </mat-form-field>
+      </mat-card-content>
+</mat-card>
+</div>
