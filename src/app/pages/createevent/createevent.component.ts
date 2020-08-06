@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {MouseEvent} from '@agm/core';
-import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
+import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 
-import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import {formatDate} from '@angular/common';
+
+
+import {DatePipe} from '@angular/common';
 /*
 export const PICK_FORMATS = {
   parse: {dateInput: {month: 'short', year: 'numeric', day: 'numeric'}},
@@ -40,6 +42,8 @@ export class CreateeventComponent implements OnInit {
   lat: number = 51.673858;
   lng: number = 7.815982;
 
+  time = {hour: 13, minute: 30};
+
   evento: any = {};
 
   eventForm = new FormGroup({
@@ -57,11 +61,13 @@ export class CreateeventComponent implements OnInit {
     ]),
     data:new FormControl("", [
       Validators.required
-    ])    
+    ]),
+    time:new FormControl(this.time,[Validators.required]) 
   })
 
 
-  constructor() { }
+
+  constructor(public datePipe : DatePipe) { }
 
   ngOnInit(): void {
     this.evento.visible = false;
@@ -86,8 +92,13 @@ export class CreateeventComponent implements OnInit {
   }
 
   click():void{
-    console.log('ciao')
-    console.log(this.eventForm)
+    let timeFromPicker = this.eventForm.get('time').value
+    var time_conv = timeFromPicker.hour + ':' + timeFromPicker.minute + ':00';
+    let dateFromPicker = this.eventForm.get('data').value;
+    let date_conv = this.datePipe.transform(dateFromPicker,'yyyy-MM-dd')
+    var fullDate = new Date(date_conv+' '+time_conv)
+    var fullDateConvert = this.datePipe.transform(fullDate,'yyyy-MM-dd HH:mm:ss')
+    console.log(fullDateConvert)
   }
 
   nolocation():void{
