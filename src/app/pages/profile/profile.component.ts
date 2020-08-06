@@ -4,6 +4,8 @@ import {AuthService} from '../../_service/auth-service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
+import { UploadService } from 'src/app/_service/upload/upload.service';
+import { Upload } from 'src/app/_service/upload/upload';
 
 export interface UserProfile{
   nome : string;
@@ -24,25 +26,14 @@ export interface UserProfile{
 
 export class ProfileComponent implements OnInit {
 
-  user : UserProfile = {
-    'nome' : 'Test',
-    'cognome' : 'Test1',
-    'email' : 'Test2',
-    'username' : 'Test3',
-    'citta' : 'Test4',
-    'telefono' : 'Test5'
-  }
+  user : UserProfile;
 
-  @Input() file: File;
+  pathPhoto: string;
 
-  private storage: AngularFireStorage;
-  task: AngularFireUploadTask;
+  selectedFiles: FileList;
+  currentUpload: Upload;
 
-  percentage: Observable<number>;
-  snapshot: Observable<any>;
-  downloadURL: string;
-
-  constructor(private Auth: AuthService,private http:HttpClient) { }
+  constructor(private Auth: AuthService, private http:HttpClient, private uploadService: UploadService) { }
 
   ngOnInit(): void {
     let url = "http://127.0.0.1:5000/profile"
@@ -56,40 +47,22 @@ export class ProfileComponent implements OnInit {
     console.log(headers)
     this.http.get(url,{headers:headers}).toPromise()
     .then((data: any) => {
-      this.user=data
-      console.log(data)
-      console.log(this.user)
-      console.log(JSON.stringify(this.user))
+      this.user=data;
+      console.log(data);
+      console.log(this.user);
+      console.log(JSON.stringify(this.user));
     })
   }
 
-  startUpload() {
-
-    // The storage path
-    const path = `test/${Date.now()}_${this.file.name}`;
-
-    // Reference to storage bucket
-    const ref = this.storage.ref(path);
-
-    // The main task
-    this.task = this.storage.upload(path, this.file);
-
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
-
-    this.snapshot   = this.task.snapshotChanges().pipe(
-      tap(console.log),
-      // The file's download URL
-      finalize( async() =>  {
-        this.downloadURL = await ref.getDownloadURL().toPromise();
-
-        //this.db.collection('files').add( { downloadURL: this.downloadURL, path });
-      }),
-    );
+  detectFiles(event){
+    this.selectedFiles = event.target.files;
   }
 
-  isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
+  uploadSingle() {
+    let file = this.selectedFiles.item(0);
+    this.currentUpload = new Upload(file,this.Auth.getId().toString());
+    this.uploadService.pushUpload(this.currentUpload);
+    console.log("ho finito...")
   }
 
 }

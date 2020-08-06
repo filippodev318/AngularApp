@@ -16,9 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
 import { AuthService } from './_service/auth-service';
+import { UploadService } from './_service/upload/upload.service';
+
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+
+import firebase from 'firebase';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDcglH7K_WV9fF3a3pJqHrlndte8Nfspeg",
@@ -30,7 +35,7 @@ const firebaseConfig = {
   appId: "1:919697256418:web:c440f0d1e53534840193bb",
   measurementId: "G-YNVWLH0GP7"
 };
-
+firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
@@ -52,7 +57,7 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig), // aggiungi questa riga 
     AngularFireStorageModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,8 +6,10 @@ export class Upload {
     url: string;
     progress: number;
     createdAt: Date = new Date();
+    path: string;
 
-    constructor(file: File) {
+    constructor(file: File,path: string) {
         this.file = file;
+        this.path=path;
     }
 }
