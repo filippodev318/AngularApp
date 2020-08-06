@@ -23,7 +23,10 @@ import { UploadService } from './_service/upload/upload.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
-import firebase from 'firebase';
+import * as firebase from 'firebase/app';
+// You don't need to import firebase/app either since it's being imported above
+import 'firebase/auth';
+import 'firebase/firestore';
 
 
 const firebaseConfig = {

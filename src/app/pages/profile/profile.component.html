@@ -6,10 +6,6 @@
         <mat-card-header></mat-card-header>
         <img mat-card-image src="{{user.url_image}}">
 
-        <div class="example-button-row">
-            <button mat-raised-button color="primary" (click)="startUpload()">Cambia Immagine</button>
-        </div>
-
         <label>
           <input type="file" (change)="detectFiles($event)">
         </label>
