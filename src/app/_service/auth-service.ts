@@ -3,10 +3,6 @@ import { HttpClient } from '@angular/common/http'
 import { Subject, Observable } from 'rxjs';
 import {EventEmitter} from '@angular/core';
 
-interface userData {
-  token : string,
-  id : number
-}
 
 @Injectable()
 export class AuthService {
