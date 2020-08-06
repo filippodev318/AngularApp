@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common'
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
@@ -37,6 +38,8 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,9 +58,10 @@ firebase.initializeApp(firebaseConfig);
     MatIconModule,
     MatListModule,
     AngularFireModule.initializeApp(firebaseConfig), // aggiungi questa riga 
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgbModule
   ],
-  providers: [AuthService, UploadService],
+  providers: [AuthService, UploadService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

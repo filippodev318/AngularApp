@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Subject, Observable } from 'rxjs';
 import {EventEmitter} from '@angular/core';
 
+
 @Injectable()
 export class AuthService {
 
@@ -12,7 +13,17 @@ export class AuthService {
   public onLoggedInStatus: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    console.log('ciaooo',this.authenticationToken)
+    if (!this.authenticationToken) {
+      this.authenticationToken = localStorage.getItem('usertoken')
+      console.log('post',this.authenticationToken)
+      if (this.authenticationToken){
+        this.setAuthenticationToken(this.authenticationToken)
+        this.setLoggedIn(true);
+      }
+    }
+  }
 
   setLoggedIn(value: boolean) {
     this.onLoggedInStatus.emit(value);
@@ -26,9 +37,14 @@ export class AuthService {
 
   setAuthenticationToken(value:string):void{
     this.authenticationToken=value;
+    localStorage.setItem('usertoken', value)
   }
 
   getAuthenticationToken():string{
+    if (!this.authenticationToken) {
+      this.authenticationToken = localStorage.getItem('usertoken')
+      this.setAuthenticationToken(this.authenticationToken)
+    }
     return this.authenticationToken;
   }
 

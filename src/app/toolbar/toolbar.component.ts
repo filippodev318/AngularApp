@@ -15,10 +15,11 @@ export class ToolbarComponent implements OnInit {
   constructor(private Auth:AuthService) { 
     this.Auth.onLoggedInStatus.subscribe({
       next: (event:boolean) => {
-          //console.log('Received message',event);
+          console.log('Received message',event);
           this.isLoggedIn$=event;
       }
     })
+    this.isLoggedIn$=this.Auth.getisLoggedIn();
 
   }
 

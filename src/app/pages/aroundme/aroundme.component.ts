@@ -16,7 +16,7 @@ export class AroundmeComponent implements OnInit  {
   // initial center position for the map
   lat: number = 51.673858;
   lng: number = 7.815982;
-  title = 'My first AGM project';
+  title = 'My first AG M project';
   id_user=28
   cards=[]
 
