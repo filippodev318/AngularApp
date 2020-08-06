@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http'
 import { Subject, Observable } from 'rxjs';
 import {EventEmitter} from '@angular/core';
 
+interface userData {
+  token : string,
+  id : number
+}
+
 @Injectable()
 export class AuthService {
 
@@ -26,9 +31,14 @@ export class AuthService {
 
   setAuthenticationToken(value:string):void{
     this.authenticationToken=value;
+    localStorage.setItem('usertoken', value)
   }
 
   getAuthenticationToken():string{
+    if (!this.authenticationToken) {
+      this.authenticationToken = localStorage.getItem('usertoken')
+      this.setAuthenticationToken(this.authenticationToken)
+    }
     return this.authenticationToken;
   }
 
