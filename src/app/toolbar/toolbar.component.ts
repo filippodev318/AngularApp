@@ -20,7 +20,13 @@ export class ToolbarComponent implements OnInit {
       }
     })
     this.isLoggedIn$=this.Auth.getisLoggedIn();
+  }
 
+  logout():void{
+    this.Auth.setLoggedIn(false);
+    this.Auth.destroyAuthenticationToken();
+    this.Auth.destroyId();
+    window.location.reload();
   }
 
   ngOnInit() { }
