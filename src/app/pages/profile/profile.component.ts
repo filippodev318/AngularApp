@@ -8,6 +8,7 @@ import { UploadService } from 'src/app/_service/upload/upload.service';
 import { Upload } from 'src/app/_service/upload/upload';
 
 export interface UserProfile{
+  url_image : string;
   nome : string;
   cognome : string;
   email : string;

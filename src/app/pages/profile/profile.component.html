@@ -6,14 +6,19 @@
         <mat-card-header></mat-card-header>
         <img mat-card-image src="{{user.url_image}}">
 
+        <br>
+
         <label>
-          <input type="file" (change)="detectFiles($event)">
+          <input style="display : none" type="file" (change)="detectFiles($event)" #fileInput>
         </label>
+        <button class="btn btn-primary" (click)="fileInput.click()">Carica Immagine</button>
+      
 
         <button class="btn btn-primary"
+                style="margin:5px;"
                 [disabled]="!selectedFiles"
                 (click)="uploadSingle()">
-                Upload Single
+                Upload
         
         </button>
         <mat-card-content>

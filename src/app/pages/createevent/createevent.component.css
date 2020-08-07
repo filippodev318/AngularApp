@@ -1,7 +1,15 @@
 agm-map {
-    width: 400px;
-    height: 443px;
+    width: 370px;
+    height: 525px;
   }
+
+mat-card{
+  border-width: 2.5px;
+  border-style: ridge;
+  border-color: cornflowerblue;
+}
+
+
 
 .create-event-card {
     max-width: 400px;
@@ -10,11 +18,25 @@ agm-map {
 
 .map{
   max-width: 400px;
+  margin-left: 25px;
   margin-top: 80px;
 }
 
+.time{
+  margin-top: 20px;
+}
+
+.center-content {
+  margin-top: 50px;
+  text-align: -webkit-center;
+}
+
+.posLabel{
+  font-size: 22px;
+}
+
 .example-full-width {
-  margin-top: 10px;
+  margin-top: 20px;
   width: 100%;
   height: 48px;
 }
