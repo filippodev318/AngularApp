@@ -7,4 +7,5 @@
     <span class="spacer-elem"></span>
     <a routerLink="/login_reg" routerLinkActive="active" *ngIf="!isLoggedIn$">Login/SignUp</a>
     <a routerLink="/profile" routerLinkActive="active" *ngIf="isLoggedIn$">Profile</a>
+    <a (click)="logout()" routerLinkActive="active" *ngIf="isLoggedIn$">Logout</a>
 </mat-toolbar>

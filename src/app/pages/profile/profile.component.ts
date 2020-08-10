@@ -34,7 +34,9 @@ export class ProfileComponent implements OnInit {
   selectedFiles: FileList;
   currentUpload: Upload;
 
-  constructor(private Auth: AuthService, private http:HttpClient, private uploadService: UploadService) { }
+  constructor(private Auth: AuthService, private http:HttpClient, private uploadService: UploadService) { 
+    console.log('id:'+this.Auth.getId().toString())
+  }
 
   ngOnInit(): void {
     let url = "http://127.0.0.1:5000/profile"
@@ -61,9 +63,8 @@ export class ProfileComponent implements OnInit {
 
   uploadSingle() {
     let file = this.selectedFiles.item(0);
-    this.currentUpload = new Upload(file,this.Auth.getId().toString());
+    this.currentUpload = new Upload(file, this.Auth.getId().toString());
     this.uploadService.pushUpload(this.currentUpload);
-    console.log("ho finito...")
   }
 
 }

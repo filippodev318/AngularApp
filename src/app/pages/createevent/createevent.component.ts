@@ -3,8 +3,7 @@ import {MouseEvent} from '@agm/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import {AuthService} from '../../_service/auth-service';
 import {HttpClient} from '@angular/common/http'
-import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
-
+import { Router } from '@angular/router';
 import {DatePipe} from '@angular/common';
 
 @Component({
@@ -45,7 +44,7 @@ export class CreateeventComponent implements OnInit {
   minDate: Date;
 
 
-  constructor(public datePipe : DatePipe, private http : HttpClient, private Auth: AuthService) {
+  constructor(public datePipe : DatePipe, private http : HttpClient, private Auth: AuthService, private router: Router) {
     this.minDate = new Date()
    }
 
@@ -102,7 +101,6 @@ export class CreateeventComponent implements OnInit {
     if(this.eventForm.valid){
         let headers = {
           'Cache-Control': 'no-cache',
-          'Cache-Content-Type': 'application/json',
           'authentication_token': this.Auth.getAuthenticationToken()
         }
         
@@ -124,6 +122,7 @@ export class CreateeventComponent implements OnInit {
         console.log(formPost)
         this.http.post(url,formPost,{headers:headers}).toPromise().then((data: any) => {
           console.log(data)
+          this.router.navigate(['/events']);
         })
       }
   }

@@ -3,6 +3,7 @@ import { Upload } from './upload';
 import * as firebase from 'firebase';
 import { AuthService } from '../auth-service';
 import {HttpClient} from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Injectable()
@@ -11,7 +12,7 @@ export class UploadService {
     private basePath: string = '/upload';
     private uploadTask: firebase.storage.UploadTask;
 
-    constructor(private Auth: AuthService, private http: HttpClient) {  }
+    constructor(private Auth: AuthService, private http: HttpClient, private snackBar:MatSnackBar) {  }
 
 
     pushUpload(upload: Upload){
@@ -28,6 +29,8 @@ export class UploadService {
             (snapshot) => {
                 upload.progress= (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
                 console.log("upload.progress: ",upload.progress)
+ 
+                this.snackBar.open('Il caricamento è al '+upload.progress.toFixed(0)+'%','',{duration:1500})
             },
             (error) => {
                 console.log("error")
@@ -43,6 +46,7 @@ export class UploadService {
                         .then((data: any) => {
                         console.log(data);
                         console.log(JSON.stringify(data));
+                        window.location.reload();
                         })
                   });
 
