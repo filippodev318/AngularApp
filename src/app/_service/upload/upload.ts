@@ -8,8 +8,8 @@ export class Upload {
     createdAt: Date = new Date();
     path: string;
 
-    constructor(file: File,path: string) {
+    constructor(file: File, path: string) {
         this.file = file;
-        this.path=path;
+        this.path = path;
     }
 }

@@ -14,9 +14,7 @@ import {HttpClientModule} from '@angular/common/http'
     CommonModule,
     AroundmeRoutingModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBK6BtCSyxSSU_gwx5nYwgfy-nXmeS38Kc'
-    })
+    AgmCoreModule
   ]
 })
 export class AroundmeModule { }

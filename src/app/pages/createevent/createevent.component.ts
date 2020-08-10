@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MouseEvent} from '@agm/core';
+import { MouseEvent } from '@agm/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import {AuthService} from '../../_service/auth-service';
-import {HttpClient} from '@angular/common/http'
+import { AuthService } from '../../_service/auth-service';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-createevent',
@@ -101,6 +101,7 @@ export class CreateeventComponent implements OnInit {
     if(this.eventForm.valid){
         let headers = {
           'Cache-Control': 'no-cache',
+          'Cache-Content-Type': 'application/json',
           'authentication_token': this.Auth.getAuthenticationToken()
         }
         
@@ -132,5 +133,5 @@ export class CreateeventComponent implements OnInit {
     this.evento.latitudine = null;
     this.evento.longitudine = null;
   }
-  
+
 }

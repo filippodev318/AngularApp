@@ -1,0 +1,27 @@
+<div class="dialog">
+        <h1 mat-dialog-title>{{card.name}}</h1>
+        <h2> Partecipanti </h2>
+        <ul class="lista_partecipanti">
+                <li *ngFor="let partecipante of partecipanti; let i = index">
+                        <mat-card-header></mat-card-header>
+                        <img mat-card-image src="{{partecipante.url_image}}">
+                        <h4> {{partecipante.nome}} {{partecipante.cognome}} </h4>
+                </li>
+        </ul>
+        <h2> Posizione </h2>
+        <agm-map 
+                [latitude]="+card.latitudine" 
+                [longitude]="+card.longitudine">
+
+                <agm-marker 
+                        [latitude]="card.latitudine"
+                        [longitude]="card.longitudine"
+                        [label]="card.name">
+        
+                </agm-marker>
+        </agm-map>
+</div>
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

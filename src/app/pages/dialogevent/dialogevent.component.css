@@ -1,0 +1,25 @@
+agm-map {
+    width: 370px;
+    height: 525px;
+  }
+
+img{
+    border-radius: 50%;
+    width:200px;
+    height: 180px;
+}
+
+mat-label{
+    font-size: 22px;
+  }
+
+.dialog{
+  width: 80%;
+  height: 80%;
+}
+
+.md-dialog-container {
+  background-color: #000;
+  width: 250px;
+  height: 250px
+}

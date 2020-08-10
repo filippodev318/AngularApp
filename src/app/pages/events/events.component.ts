@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import { equal } from 'assert';
-import {AuthService} from '../../_service/auth-service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../_service/auth-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { DatePipe } from '@angular/common';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
+import { DialogeventComponent } from '../dialogevent/dialogevent.component';
 
 @Component({
   selector: 'app-events',
@@ -14,19 +15,12 @@ export class EventsComponent implements OnInit {
 
   cards = [
   ];
-  carta = {
-    name : "Evento",
-    sport : "Calcio",
-    numbersplayer : "1/4",
-    price : "10",
-    date : "22/05/2020"
-  }
 
   button_text='Partecipa';
   id_user= -1;
   isLoggedIn$: boolean;
 
-  constructor(private Auth: AuthService, private http:HttpClient, private snackBar:MatSnackBar) { 
+  constructor(private Auth: AuthService, private http: HttpClient, private snackBar: MatSnackBar, public datePipe: DatePipe, public dialog: MatDialog) {
     this.Auth.onLoggedInStatus.subscribe({
       next: (event:boolean) => {
           console.log('Received message',event);
@@ -36,14 +30,14 @@ export class EventsComponent implements OnInit {
     this.isLoggedIn$= this.Auth.getisLoggedIn();
     if (this.isLoggedIn$) {
       this.id_user= this.Auth.getId();
-    }
-    
+    }   
   }
+
   possoPremere: boolean =true;
   join(id: String) : void {
       if(this.isLoggedIn$) {
         if(this.possoPremere){
-          this.possoPremere=false;
+          this.possoPremere= false;
           this.cards.forEach(card => {
             if (card.id == id) {
               if (card.button_text==='Non Partecipare')
@@ -80,6 +74,41 @@ export class EventsComponent implements OnInit {
       }
   }
 
+  openDialog(id: String) {
+
+    function findId(card) { 
+      return card.id === id;
+    }
+    let card= this.cards.find(findId);
+    let url="http://127.0.0.1:5000/profile/"
+    let partecipanti=[];
+
+    card.id_partecipanti.forEach(
+        element => {
+                      this.http.get(url+element,{}).toPromise()
+                        .then(
+                                (data: any) => {
+                                                  console.log('Ho chiesto i dati per l utente',element)
+                                                  partecipanti.push(data);
+                                                }
+                              );
+                    }
+      );
+
+    console.log(partecipanti);
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      partecipanti: partecipanti,
+      event: card
+    };
+
+    const dialogRef = this.dialog.open(DialogeventComponent,dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   ngOnInit(): void {
     let url = "http://127.0.0.1:5000/events"
@@ -87,6 +116,9 @@ export class EventsComponent implements OnInit {
     .then((data: any) => {
       this.cards=data;
       this.cards.forEach(card => {
+        var fullDate = new Date(card.date);
+        var fullDateConvert = this.datePipe.transform(fullDate,'yyyy-MM-dd HH:mm');
+        card.dateDisplay = fullDateConvert;
         if(this.isLoggedIn$) {
           if (card.id_partecipanti.some(e => e === this.id_user)){
             card.button_text='Non Partecipare'
@@ -97,7 +129,7 @@ export class EventsComponent implements OnInit {
         }
         else
         {
-          card.button_text='Loggati per partecipare'
+          card.button_text='Partecipa'
         }
       });
       console.log(this.cards);

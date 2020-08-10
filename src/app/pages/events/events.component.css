@@ -5,8 +5,13 @@
     flex-wrap: wrap;
 }
 .example-card {
-    max-width: 250px;
+    width: 240px;
+    height: 270px;
+    border-radius: 7%;
     margin: 20px;
+    border-width: 3.2px;
+    border-style: ridge;
+    border-color: #e0e0e0;
   }
 
 .carta{

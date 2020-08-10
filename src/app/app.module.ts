@@ -12,17 +12,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { DialogeventComponent } from './pages/dialogevent/dialogevent.component';
 
 import { AuthService } from './_service/auth-service';
 import { UploadService } from './_service/upload/upload.service';
 
-
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-
 import * as firebase from 'firebase/app';
 // You don't need to import firebase/app either since it's being imported above
 import 'firebase/auth';
@@ -43,10 +42,13 @@ firebase.initializeApp(firebaseConfig);
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    DialogeventComponent
   ],
   imports: [
     BrowserModule,
@@ -62,9 +64,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatListModule,
     AngularFireModule.initializeApp(firebaseConfig), // aggiungi questa riga 
     AngularFireStorageModule,
-    NgbModule
+    NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBK6BtCSyxSSU_gwx5nYwgfy-nXmeS38Kc'
+    })
   ],
-  providers: [AuthService, UploadService,DatePipe],
-  bootstrap: [AppComponent]
+  providers: [AuthService, UploadService, DatePipe],
+  bootstrap: [AppComponent],
+  entryComponents: [DialogeventComponent]
 })
 export class AppModule { }
