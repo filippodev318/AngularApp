@@ -4,9 +4,9 @@ agm-map {
   }
 
 mat-card{
-  border-width: 2.5px;
+  border-width: 3.6px;
   border-style: ridge;
-  border-color: cornflowerblue;
+  border-color: #e0e0e0;
 }
 
 
@@ -33,6 +33,8 @@ mat-card{
 
 .posLabel{
   font-size: 22px;
+  color: #004A80;
+  font-weight: bold;
 }
 
 .example-full-width {

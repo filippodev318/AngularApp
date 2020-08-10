@@ -8,6 +8,29 @@
     max-width: 250px;
     margin: 20px;
   }
+
+.carta{
+  text-align: -webkit-center;
+  max-width: 240px;
+  max-height: 270px;
+  border-radius: 7%;
+  margin: 20px;
+  border-width: 3.2px;
+  border-style: ridge;
+  border-color: #e0e0e0;
+}
+
+.labelInfo{
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 5px;
+  color: #004A80;
+}
+
+.labelValue{
+  font-size : 15px;
+  margin-left: 2px;
+}
   
   .example-header-image {
     width: 40px;

@@ -12,7 +12,7 @@
   <mat-form-field class="example-full-width" appearance="standard">
     <mat-label>Nome</mat-label>
     <input matInput placeholder="Placeholder" formControlName="nome">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matSuffix>event</mat-icon>
     <mat-hint>Dai un nome all'evento</mat-hint>
     <mat-error>{{eventNameErrorMessage()}}</mat-error>
   </mat-form-field>
@@ -20,7 +20,7 @@
   <mat-form-field class="example-full-width" appearance="standard">
     <mat-label>Numero di partecipanti</mat-label>
     <input matInput placeholder="Placeholder" formControlName="numerodipartecipanti" type="number" min="2" max="100" onKeyUp="if(this.value>100){this.value='100';}else if(this.value<2){this.value='2';}">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matSuffix>group</mat-icon>
     <mat-hint>Indica il numero di partecipanti</mat-hint>
     <mat-error>{{numPartecipantiErrorMessage()}}</mat-error>
   </mat-form-field>

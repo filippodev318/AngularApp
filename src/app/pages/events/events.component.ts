@@ -12,6 +12,14 @@ export class EventsComponent implements OnInit {
 
   cards = [
   ];
+  carta = {
+    name : "Evento",
+    sport : "Calcio",
+    numbersplayer : "1/4",
+    price : "10",
+    date : "22/05/2020"
+  }
+
   button_text='Partecipa';
   id_user=28
   

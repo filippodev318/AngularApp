@@ -2,7 +2,7 @@
 @include mat-core();
 
 $color1:(
-    50 : #5DB0AC,
+    50 : #004A80,
     contrast:(
       50 : #fcfcfc
     )
@@ -14,3 +14,7 @@ $my-accent: mat-palette($mat-light-green, 800);
 $my-theme: mat-light-theme($my-primary, $my-accent);
 
 @include angular-material-theme($my-theme);
+
+
+
+//#5DB0AC

@@ -2,4 +2,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
-background-color: #C6FDF8; }
+background: linear-gradient(to right, rgb(102, 125, 182), rgb(0, 130, 200), rgb(0, 130, 200), rgb(102, 125, 182));} 
+/*linear-gradient(to right, rgb(194, 229, 156), rgb(100, 179, 244));} 
+/*linear-gradient(to right, rgb(0, 121, 145), rgb(120, 255, 214));}
+
+/*linear-gradient(to right, rgb(6, 190, 182), rgb(72, 177, 191))
+/*linear-gradient(to right, rgb(102, 125, 182), rgb(0, 130, 200), rgb(0, 130, 200), rgb(102, 125, 182));
+
+/*#C6FDF8; */
