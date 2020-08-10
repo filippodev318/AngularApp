@@ -33,9 +33,16 @@ export class ProfileComponent implements OnInit {
 
   selectedFiles: FileList;
   currentUpload: Upload;
-
+  percentuale;
+  caricamento;
   constructor(private Auth: AuthService, private http:HttpClient, private uploadService: UploadService) { 
     console.log('id:'+this.Auth.getId().toString())
+    this.uploadService.percentuale.subscribe({
+      next: (event:string) => {
+          console.log('Received message jhygvfcdxsza',event);
+          this.percentuale=+event;
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -62,6 +69,7 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadSingle() {
+    this.caricamento=true;
     let file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file, this.Auth.getId().toString());
     this.uploadService.pushUpload(this.currentUpload);

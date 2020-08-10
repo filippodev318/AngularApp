@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { Injectable, EventEmitter } from "@angular/core"
 import { Upload } from './upload';
 import * as firebase from 'firebase';
 import { AuthService } from '../auth-service';
@@ -11,6 +11,7 @@ export class UploadService {
 
     private basePath: string = '/upload';
     private uploadTask: firebase.storage.UploadTask;
+    public percentuale: EventEmitter<string> = new EventEmitter<string>();
 
     constructor(private Auth: AuthService, private http: HttpClient, private snackBar:MatSnackBar) {  }
 
@@ -27,16 +28,17 @@ export class UploadService {
 
         this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
             (snapshot) => {
-                upload.progress= (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+                upload.progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
                 console.log("upload.progress: ",upload.progress)
- 
-                this.snackBar.open('Il caricamento è al '+upload.progress.toFixed(0)+'%','',{duration:1500})
+                this.percentuale.emit(upload.progress.toString());
             },
             (error) => {
                 console.log("error")
             },
             () => {
+                that=this;
                 this.uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                    that.snackBar.open('Il caricamento è stato completato','',{duration:1500})
                     upload.name=upload.file.name;
                     upload.url=downloadURL;
                     console.log("url: ",downloadURL,"name: ",upload.name);

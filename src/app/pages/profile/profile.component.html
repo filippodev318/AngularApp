@@ -12,6 +12,8 @@
           <input style="display : none" type="file" (change)="detectFiles($event)" #fileInput>
         </label>
         <button class="btn btn-primary" (click)="fileInput.click()">Carica Immagine</button>
+        <mat-progress-bar mode="buffer" value={{percentuale}} *ngIf="caricamento"></mat-progress-bar>
+
       
 
         <button class="btn btn-primary"

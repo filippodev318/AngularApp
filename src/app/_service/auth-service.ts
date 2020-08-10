@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Subject, Observable } from 'rxjs';
-import {EventEmitter} from '@angular/core';
-
 
 @Injectable()
 export class AuthService {

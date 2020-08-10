@@ -11,6 +11,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -25,7 +27,9 @@ const MaterialComponents = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressBarModule,
+  MatMenuModule  
 ]
 
 @NgModule({
