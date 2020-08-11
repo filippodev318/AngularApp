@@ -4,6 +4,7 @@ import {AuthService} from '../../_service/auth-service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
+import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 import { UploadService } from 'src/app/_service/upload/upload.service';
 import { Upload } from 'src/app/_service/upload/upload';
 
@@ -27,6 +28,15 @@ export interface UserProfile{
 
 export class ProfileComponent implements OnInit {
 
+  profileForm = new FormGroup({
+    telefono:new FormControl("",[
+      Validators.pattern("[0-9 ]{10}")
+    ]),
+    citta:new FormControl("",)
+  }) 
+
+  editable : boolean;
+
   user : UserProfile;
 
   pathPhoto: string;
@@ -38,7 +48,16 @@ export class ProfileComponent implements OnInit {
     console.log('id:'+this.Auth.getId().toString())
   }
 
+  phoneErrorMessage(){
+    if (this.profileForm.get('telefono').hasError('pattern')) 
+      return 'Numero di telefono non valido';  
+  }
+
+
   ngOnInit(): void {
+    this.editable=false
+    console.log('init',this.editable)
+    
     let url = "http://127.0.0.1:5000/profile"
 
     let headers = {
@@ -54,6 +73,7 @@ export class ProfileComponent implements OnInit {
       console.log(data);
       console.log(this.user);
       console.log(JSON.stringify(this.user));
+      this.editable = false
     })
   }
 
@@ -66,5 +86,31 @@ export class ProfileComponent implements OnInit {
     this.currentUpload = new Upload(file, this.Auth.getId().toString());
     this.uploadService.pushUpload(this.currentUpload);
   }
+
+  buttonEdit(){
+    this.editable = true
+    console.log('button EDIT',this.editable)
+  }
+
+  updateField(){
+    if(this.profileForm.valid){
+        let url = "http://127.0.0.1:5000/profile"
+
+        let headers = {
+            'Cache-Control': 'no-cache',
+            'Cache-Content-Type': 'application/json',
+            'authentication_token': this.Auth.getAuthenticationToken()
+          }
+
+        this.http.post(url,this.profileForm).toPromise().then((data: any) => {
+            console.log(data)
+            this.editable = false;
+            this.user.citta = this.profileForm.get("citta").value;
+            this.user.telefono = this.profileForm.get("telefono").value;
+          })
+
+          
+      }
+    }
 
 }
