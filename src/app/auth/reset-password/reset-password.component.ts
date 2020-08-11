@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http'
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import {AuthService} from '../../_service/auth-service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,6 +11,8 @@ import {AuthService} from '../../_service/auth-service';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
+
+  token: string;
 
   resetForm = new FormGroup({
     nuovaPassword:new FormControl("", [
@@ -22,13 +25,27 @@ export class ResetPasswordComponent implements OnInit {
     ])
   })
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      console.log(params)
+      this.token = params.get('token');
+    });
   }
 
   changePassword(){
+    console.log('token: '+this.token)
+    let formPost = {
+      'password' : this.resetForm.get('nuovaPassword').value,
+      'password_confirm' : this.resetForm.get('nuovaPassword').value
+    };
 
+    this.http.post("http://127.0.0.1:5000/reset/"+this.token, formPost).toPromise().then((data: any) => {
+      console.log(data);
+      console.log("Password cambiata con successo");
+      this.router.navigate(['/login-reg']);
+    })
   }
 
   pwdErrorMessage(){

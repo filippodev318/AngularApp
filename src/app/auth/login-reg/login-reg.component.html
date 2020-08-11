@@ -13,7 +13,7 @@
             <form [formGroup]="logForm">
             <mat-form-field class="example-full-width">
               <mat-label>Email</mat-label>
-              <input type="email" matInput placeholder="Email" value="" formControlName="email" required>
+              <input type="email" matInput placeholder="Email" value="" formControlName="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
               <mat-error>{{emailErrorMessage()}}</mat-error>
               <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
@@ -24,7 +24,7 @@
               <mat-error>{{pwdErrorMessage()}}</mat-error>
               <mat-icon matSuffix>vpn_key</mat-icon>
             </mat-form-field>
-            <a class=password href="/resetPassword">Password dimenticata</a>
+            <a class=password (click)="resetPassword(logForm)">Password dimenticata</a>
             <button mat-button color="primary" (click)="login(logForm)">Login</button>
           </form>
           
@@ -63,7 +63,7 @@
 
             <mat-form-field class="example-full-width">
               <mat-label>Email</mat-label>
-              <input type="email" matInput placeholder="Email" formControlName="email" required>
+              <input type="email" matInput placeholder="Email" formControlName="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
               <mat-icon matSuffix>email</mat-icon>
               <mat-error>{{emailErrorMessage()}}</mat-error>
             </mat-form-field>

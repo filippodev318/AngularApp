@@ -71,6 +71,8 @@ export class AuthService {
   login(email, password) {
     //console.log(email, password );
     return this.http.post('http://127.0.0.1:5000/login', {email, password});
+  
+  
   }
 
 }
