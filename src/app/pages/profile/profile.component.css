@@ -1,9 +1,10 @@
 .profile-card{
     max-width: 400px;
+    height: 665px;
 }
 
 .center-content {
-    margin-top: 50px;
+    margin-top: 20px;
     text-align: -webkit-center;
 }
 
@@ -14,11 +15,11 @@ img{
 }
 
 mat-label{
-    font-size: 22px;
+    font-size: 20px;
   }
 
 input{
-    margin-top: 5px;
+    margin-top: 7px;
     font-size : 18px;
 }
 

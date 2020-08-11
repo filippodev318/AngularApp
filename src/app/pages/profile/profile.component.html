@@ -1,4 +1,3 @@
-<p>profile works!</p>
 <div class="center-content">
 <mat-card class="profile-card">
 
@@ -49,11 +48,26 @@
             <mat-icon matSuffix>account_circle</mat-icon>
           </mat-form-field>
 
-          <mat-form-field class="example-full-width">
-            <mat-label>Citta</mat-label>
-            <input type="citta" matInput value="{{user.citta}}" readonly>
-            <mat-icon matSuffix>location_city</mat-icon>
-          </mat-form-field>
+          <form [formGroup]="profileForm">
+            <mat-form-field class="example-full-width">
+              <mat-label>Citta</mat-label>
+              <input type="citta" matInput value="{{user.citta}}" [readonly]="!editable" formControlName="citta">
+              <mat-icon *ngIf="!editable" matSuffix>location_city</mat-icon>
+              <mat-icon *ngIf="editable" matSuffix>edit</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Telefono</mat-label>
+              <input type="phone" matInput value="{{user.telefono}}" [readonly]="!editable" formControlName="telefono">
+              <mat-icon *ngIf="!editable" matSuffix>phone</mat-icon>
+              <mat-icon *ngIf="editable" matSuffix>edit</mat-icon>
+              <mat-error *ngIf="editable">{{phoneErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </form>
+  
+            <button mat-raised-button style="margin: 25px;" color="primary" [hidden]="editable" (click)="buttonEdit()">Modifica</button>
+            <button mat-raised-button style="margin: 25px;" color="primary" [hidden]="!editable" (click)="updateField()">Conferma</button>
+  
       </mat-card-content>
 </mat-card>
 </div>
