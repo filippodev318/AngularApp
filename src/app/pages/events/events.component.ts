@@ -6,11 +6,13 @@ import { DatePipe } from '@angular/common';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogeventComponent } from '../dialogevent/dialogevent.component';
 
+
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.css']
 })
+
 export class EventsComponent implements OnInit {
 
   cards = [
@@ -19,6 +21,7 @@ export class EventsComponent implements OnInit {
   button_text='Partecipa';
   id_user= -1;
   isLoggedIn$: boolean;
+  sport=['Calcio','Tennis','Basket','Jogging'];
 
   constructor(private Auth: AuthService, private http: HttpClient, private snackBar: MatSnackBar, public datePipe: DatePipe, public dialog: MatDialog) {
     this.Auth.onLoggedInStatus.subscribe({
@@ -119,20 +122,57 @@ export class EventsComponent implements OnInit {
         var fullDate = new Date(card.date);
         var fullDateConvert = this.datePipe.transform(fullDate,'yyyy-MM-dd HH:mm');
         card.dateDisplay = fullDateConvert;
-        if(this.isLoggedIn$) {
-          if (card.id_partecipanti.some(e => e === this.id_user)){
-            card.button_text='Non Partecipare'
-          }
-          else{
-            card.button_text='Partecipa'
-          }
+        //if(this.isLoggedIn$) {
+        if (card.id_partecipanti.some(e => e === this.id_user)){
+            card.button_text= 'Non Partecipare';
         }
         else
         {
-          card.button_text='Partecipa'
+            card.button_text= 'Partecipa';
         }
+        //}
+        //else
+        //{
+        //  card.button_text= 'Partecipa';
+        //}
+        card.visible=true;
       });
-      console.log(this.cards);
-    })
+      this.cards.sort((a, b) => {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      });
+      this.check(null)
+    });
   }
+
+  check(sport:string){
+    
+    if(this.sport.includes(sport))
+    {
+      const index = this.sport.indexOf(sport, 0);
+      if (index > -1) {
+        this.sport.splice(index, 1);
+      }
+    }
+    else
+    {
+      this.sport.push(sport);
+    }
+
+    console.log(this.sport)
+
+    this.cards.forEach(card => {
+      if(this.sport.includes(card.sport))
+      {
+          card.visible=true;
+      }
+      else
+      {
+          card.visible=false;
+      }
+    });
+  }
+
 }
+
+
+

@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -29,7 +30,8 @@ const MaterialComponents = [
   MatSelectModule,
   MatDialogModule,
   MatProgressBarModule,
-  MatMenuModule  
+  MatMenuModule,
+  MatCheckboxModule
 ]
 
 @NgModule({
