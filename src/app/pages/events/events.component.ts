@@ -17,7 +17,7 @@ export class EventsComponent implements OnInit {
 
   cards = [
   ];
-
+  
   button_text='Partecipa';
   id_user= -1;
   isLoggedIn$: boolean;
