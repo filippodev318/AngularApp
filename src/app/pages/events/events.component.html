@@ -1,5 +1,5 @@
 <div style="text-align: right;margin-right: 10px;margin-top: 10px;">
-  <a class="btn btn-primary" *ngIf="isLoggedIn$" href="/createevent">Crea Evento</a>
+  <a class="btn btn-primary" *ngIf="isLoggedIn$" routerLink="/createevent">Crea Evento</a>
 </div> 
 <div style="text-align: center;">
   <mat-checkbox class="example-margin" (change)="check('Calcio')" [checked]=true >Calcio</mat-checkbox>

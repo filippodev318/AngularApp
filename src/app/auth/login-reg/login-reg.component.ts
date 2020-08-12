@@ -11,6 +11,7 @@ import {AuthService} from '../../_service/auth-service';
   styleUrls: ['./login-reg.component.css']
 })
 export class LoginRegComponent implements OnInit {
+  backend="http://93.55.184.20:5000"
 
   logForm = new FormGroup({
     email:new FormControl("", [
@@ -103,18 +104,19 @@ export class LoginRegComponent implements OnInit {
 
 
   register(regForm) {
-
-    let url = "http://127.0.0.1:5000/register"
-    //let url = "http://httpbin.org/post"
+    let url = this.backend+"/register"
     if(regForm.valid){
-    this.snackBar.open('Registrazione in corso.... !!','',{duration:1500})
+    this.snackBar.open('Registrazione in corso.... !!','',{duration:3000})
     this.http.post(url,regForm.value).toPromise().then((data: any) => {
-      console.log(data);
       console.log(data);
       console.log(data["response"]);
       console.log(data["response"]["user"]["authentication_token"]);
       console.log(data["response"]["user"]["id"]);
       this.snackBar.open('Registrazione avvenuta con successo !!','',{duration:2000});
+      this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
+      this.Auth.setId(data["response"]["user"]["id"]);
+      this.Auth.setLoggedIn(true);
+      this.router.navigate(['home'])
       regForm.reset();
     });
   }
@@ -122,13 +124,14 @@ export class LoginRegComponent implements OnInit {
   }
   
   login(logForm) {
-    let url = "http://127.0.0.1:5000/reset"
+    let url = this.backend+"/login"
 
     if(logForm.valid){
       console.log('email',logForm.get('email').value)
-
-      this.Auth.login(logForm.get('email').value, logForm.get('password').value).subscribe(
-        data => {
+      let email = logForm.get('email').value;
+      let password = logForm.get('password').value;
+      this.http.post(url,{email,password}).toPromise().then(
+        (data: any) => {
           console.log('login_reg data: ', data);
           this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
           this.Auth.setId(data["response"]["user"]["id"]);
@@ -146,7 +149,7 @@ export class LoginRegComponent implements OnInit {
   }
 
   resetPassword(logForm) {
-    let url = "http://127.0.0.1:5000/reset"
+    let url = this.backend+"/reset"
 
     if(logForm.get('email').valid){
 

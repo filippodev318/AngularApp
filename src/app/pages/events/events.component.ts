@@ -21,6 +21,7 @@ export class EventsComponent implements OnInit {
   id_user= -1;
   isLoggedIn$: boolean;
   sport=['Calcio','Tennis','Basket','Jogging'];
+  backend="http://93.55.184.20:5000"
 
   constructor(private Auth: AuthService, private http: HttpClient, private snackBar: MatSnackBar, public datePipe: DatePipe, public dialog: MatDialog) {
     this.Auth.onLoggedInStatus.subscribe({
@@ -44,7 +45,7 @@ export class EventsComponent implements OnInit {
             if (card.id == id) {
               if (card.button_text==='Non Partecipare')
               {
-                var url="http://127.0.0.1:5000/dispartecipa/";
+                var url=this.backend+"/dispartecipa/";
                 card.button_text= 'Partecipa';
                 let index=card.id_partecipanti.indexOf(this.id_user);
                 if (index !== -1) {
@@ -53,7 +54,7 @@ export class EventsComponent implements OnInit {
               }
               else
               {
-                var url="http://127.0.0.1:5000/partecipa/";
+                var url=this.backend+"/partecipa/";
                 card.button_text= 'Non Partecipare';
                 card.id_partecipanti.push(this.id_user);
               }
@@ -82,7 +83,7 @@ export class EventsComponent implements OnInit {
       return card.id === id;
     }
     let card= this.cards.find(findId);
-    let url="http://127.0.0.1:5000/profile/"
+    let url=this.backend+"/profile/"
     let partecipanti=[];
 
     card.id_partecipanti.forEach(
@@ -114,7 +115,7 @@ export class EventsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let url = "http://127.0.0.1:5000/events"
+    let url = this.backend+"/events"
     this.http.get(url,{}).toPromise()
     .then((data: any) => {
       this.cards=data;

@@ -14,12 +14,13 @@ import { DatePipe } from '@angular/common';
 
 export class CreateeventComponent implements OnInit {
 
-  lat: number = 51.673858;
-  lng: number = 7.815982;
+  lat: number = 40.514680;
+  lng: number = 14.163612;
 
   time = {hour: 13, minute: 30};
 
   evento: any = {};
+  backend="http://93.55.184.20:5000"
 
 
   eventForm = new FormGroup({
@@ -45,10 +46,13 @@ export class CreateeventComponent implements OnInit {
 
   constructor(public datePipe : DatePipe, private http : HttpClient, private Auth: AuthService, private router: Router) {
     this.minDate = new Date()
+    console.log('costruttore createevent')
    }
 
   ngOnInit(): void {
     this.evento.visible = false;
+    console.log('oninit createevent')
+
   }
 
   eventNameErrorMessage() {
@@ -95,7 +99,7 @@ export class CreateeventComponent implements OnInit {
   }
 
   creaEvento():void{
-    let url = "http://127.0.0.1:5000/events"
+    let url = this.backend+"/events"
     
     if(this.eventForm.valid){
         let headers = {
