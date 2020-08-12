@@ -8,11 +8,10 @@
     <a routerLink="/login_reg" routerLinkActive="active" *ngIf="!isLoggedIn$">Login/SignUp</a>
     <!--routerLink="/profile" routerLinkActive="active"-->
    
-    <button mat-button  routerLink="/profile" routerLinkActive="active" *ngIf="isLoggedIn$" [matMenuTriggerFor]="menu"><mat-icon>person</mat-icon></button>
-
+    <button mat-button *ngIf="isLoggedIn$" [matMenuTriggerFor]="menu"><mat-icon>person</mat-icon></button>
     <mat-menu #menu="matMenu">
-     <button mat-menu-item>Item 1</button>
-     <button mat-menu-item>Item 2</button>
+        <button mat-menu-item routerLink="/profile">Profile</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
     
     <!--<a routerLink="/profile" routerLinkActive="active" *ngIf="isLoggedIn$">Profile</a>

@@ -6,15 +6,11 @@
 
     <agm-marker 
         *ngFor="let card of cards; let i = index"
-        (markerClick)="clickedMarker(card.name, i)"
         [latitude]="card.latitudine"
         [longitude]="card.longitudine"
-        [label]="card.name"
-        [markerDraggable]="true"
-        (dragEnd)="markerDragEnd($event)">
+        [label]="card.name">
         <agm-info-window>
                 <h2>{{card.name}}</h2>
-                <h5>{{card.name}}</h5>
                 <a href="http://127.0.0.1:4200/event/{{card.id}}">Details</a>
         </agm-info-window>
 

@@ -5,7 +5,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
-import { UploadService } from 'src/app/_service/upload/upload.service';
+import { UploadService } from 'src/app/_service/upload/upload-service';
 import { Upload } from 'src/app/_service/upload/upload';
 
 export interface UserProfile{
@@ -80,8 +80,9 @@ export class ProfileComponent implements OnInit {
       console.log(data);
       console.log(this.user);
       console.log(JSON.stringify(this.user));
-      this.editable = false
+      this.editable = false;
     })
+
   }
 
   detectFiles(event){

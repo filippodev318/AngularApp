@@ -6,7 +6,6 @@ import { DatePipe } from '@angular/common';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogeventComponent } from '../dialogevent/dialogevent.component';
 
-
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
@@ -107,10 +106,11 @@ export class EventsComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(DialogeventComponent,dialogConfig);
-
+/*
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+*/
   }
 
   ngOnInit(): void {
@@ -145,7 +145,6 @@ export class EventsComponent implements OnInit {
   }
 
   check(sport:string){
-    
     if(this.sport.includes(sport))
     {
       const index = this.sport.indexOf(sport, 0);

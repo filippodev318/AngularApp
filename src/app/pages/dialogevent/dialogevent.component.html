@@ -1,14 +1,16 @@
 <div class="dialog">
-        <h1 mat-dialog-title>{{card.name}}</h1>
-        <h2> Partecipanti </h2>
-        <ul class="lista_partecipanti">
-                <li *ngFor="let partecipante of partecipanti; let i = index">
+        <h1 mat-dialog-title style="font-weight:bold;text-align: -webkit-center">{{card.name}}</h1>
+        <h3 style="font-weight:bold; text-align: -webkit-center"> Partecipanti </h3>
+        <ul fxLayout='row' fxLayoutWrap class="lista_partecipanti">
+                <li *ngFor="let partecipante of partecipanti; let i = index" class="item">
                         <mat-card-header></mat-card-header>
                         <img mat-card-image src="{{partecipante.url_image}}">
                         <h4> {{partecipante.nome}} {{partecipante.cognome}} </h4>
                 </li>
         </ul>
-        <h2> Posizione </h2>
+
+        <div class="maps">
+        <h3 style="font-weight:bold;"> Posizione </h3>
         <agm-map 
                 [latitude]="+card.latitudine" 
                 [longitude]="+card.longitudine">
@@ -20,6 +22,7 @@
         
                 </agm-marker>
         </agm-map>
+        </div>
 </div>
 
 <!-- Copyright 2020 Google LLC. All Rights Reserved.

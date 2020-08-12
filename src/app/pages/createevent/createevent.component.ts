@@ -43,7 +43,6 @@ export class CreateeventComponent implements OnInit {
 
   minDate: Date;
 
-
   constructor(public datePipe : DatePipe, private http : HttpClient, private Auth: AuthService, private router: Router) {
     this.minDate = new Date()
    }

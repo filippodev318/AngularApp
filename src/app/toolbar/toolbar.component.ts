@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AuthService } from '../_service/auth-service';
-import {EventEmitter} from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -12,7 +12,7 @@ export class ToolbarComponent implements OnInit {
 
   isLoggedIn$: boolean;
 
-  constructor(private Auth:AuthService) { 
+  constructor(private Auth:AuthService, private router: Router) { 
     this.Auth.onLoggedInStatus.subscribe({
       next: (event:boolean) => {
           console.log('Received message',event);
@@ -26,7 +26,7 @@ export class ToolbarComponent implements OnInit {
     this.Auth.setLoggedIn(false);
     this.Auth.destroyAuthenticationToken();
     this.Auth.destroyId();
-    window.location.reload();
+    this.router.navigate(['/events']);
   }
 
   ngOnInit() { }

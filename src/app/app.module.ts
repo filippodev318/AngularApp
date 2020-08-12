@@ -13,7 +13,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { DialogeventComponent } from './pages/dialogevent/dialogevent.component';
 
 import { AuthService } from './_service/auth-service';
-import { UploadService } from './_service/upload/upload.service';
+import { UploadService } from './_service/upload/upload-service';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';

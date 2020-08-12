@@ -1,9 +1,12 @@
-<a class="btn btn-primary" *ngIf="isLoggedIn$" href="/createevent">Crea Evento</a>
-<mat-checkbox class="example-margin" (change)="check('Calcio')" [checked]=true >Calcio</mat-checkbox>
-<mat-checkbox class="example-margin" (change)="check('Basket')" [checked]=true >Basket</mat-checkbox>
-<mat-checkbox class="example-margin" (change)="check('Tennis')" [checked]=true >Tennis</mat-checkbox>
-<mat-checkbox class="example-margin" (change)="check('Jogging')" [checked]=true >Jogging</mat-checkbox>
-
+<div style="text-align: right;margin-right: 10px;margin-top: 10px;">
+  <a class="btn btn-primary" *ngIf="isLoggedIn$" href="/createevent">Crea Evento</a>
+</div> 
+<div style="text-align: center;">
+  <mat-checkbox class="example-margin" (change)="check('Calcio')" [checked]=true >Calcio</mat-checkbox>
+  <mat-checkbox class="example-margin" (change)="check('Basket')" [checked]=true >Basket</mat-checkbox>
+  <mat-checkbox class="example-margin" (change)="check('Tennis')" [checked]=true >Tennis</mat-checkbox>
+  <mat-checkbox class="example-margin" (change)="check('Jogging')" [checked]=true >Jogging</mat-checkbox>
+</div>
  <div fxLayout='row' fxLayoutWrap class="cards">
     <div class="example-card" *ngFor="let card of cards" style="display:{{ card.visible ? 'block' : 'none' }}">
       <mat-card>
