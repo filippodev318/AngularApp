@@ -36,15 +36,13 @@ export class ProfileComponent implements OnInit {
   }) 
 
   editable : boolean;
-
   user : UserProfile;
-
   pathPhoto: string;
-
   selectedFiles: FileList;
   currentUpload: Upload;
   percentuale;
   caricamento;
+  backend="http://93.55.184.20:5000"
   constructor(private Auth: AuthService, private http:HttpClient, private uploadService: UploadService) { 
     console.log('id:'+this.Auth.getId().toString())
     this.uploadService.percentuale.subscribe({
@@ -65,7 +63,7 @@ export class ProfileComponent implements OnInit {
     this.editable=false
     console.log('init',this.editable)
     
-    let url = "http://127.0.0.1:5000/profile"
+    let url = this.backend+"/profile"
 
     let headers = {
         'Cache-Control': 'no-cache',
