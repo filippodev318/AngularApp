@@ -107,18 +107,25 @@ export class LoginRegComponent implements OnInit {
     let url = this.backend+"/register"
     if(regForm.valid){
     this.snackBar.open('Registrazione in corso.... !!','',{duration:3000})
-    this.http.post(url,regForm.value).toPromise().then((data: any) => {
-      console.log(data);
-      console.log(data["response"]);
-      console.log(data["response"]["user"]["authentication_token"]);
-      console.log(data["response"]["user"]["id"]);
-      this.snackBar.open('Registrazione avvenuta con successo !!','',{duration:2000});
-      this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
-      this.Auth.setId(data["response"]["user"]["id"]);
-      this.Auth.setLoggedIn(true);
-      this.router.navigate(['home'])
-      regForm.reset();
-    });
+    this.http.post(url,regForm.value).toPromise().then(
+      (data: any) => {
+                        console.log("hcndxjsmdnjs")
+                        console.log(data);
+                        console.log(data["response"]);
+                        console.log(data["response"]["user"]["authentication_token"]);
+                        console.log(data["response"]["user"]["id"]);
+                        this.snackBar.open('Registrazione avvenuta con successo !!','',{duration:2000});
+                        this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
+                        this.Auth.setId(data["response"]["user"]["id"]);
+                        this.Auth.setLoggedIn(true);
+                        this.router.navigate(['home'])
+                        regForm.reset();
+                      },
+      (error: any) => {
+                        console.log(error)
+                        this.snackBar.open(JSON.stringify(error["error"]["response"]["errors"]),'',{duration:7000});  
+                      }              
+    );
   }
    
   }
@@ -132,18 +139,20 @@ export class LoginRegComponent implements OnInit {
       let password = logForm.get('password').value;
       this.http.post(url,{email,password}).toPromise().then(
         (data: any) => {
-          console.log('login_reg data: ', data);
-          this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
-          this.Auth.setId(data["response"]["user"]["id"]);
-          this.Auth.setLoggedIn(true);
-          this.router.navigate(['home'])
-          console.log(this.Auth.getAuthenticationToken());
-          console.log(this.Auth.getId());
-        },
+                          console.log('login_reg data: ', data);
+                          this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
+                          this.Auth.setId(data["response"]["user"]["id"]);
+                          this.Auth.setLoggedIn(true);
+                          this.router.navigate(['home'])
+                          console.log(this.Auth.getAuthenticationToken());
+                          console.log(this.Auth.getId());
+                        },
 
-        error => {
-          console.log(error);
-        }
+        (error: any) => {
+                        console.log(error)
+                        this.snackBar.open(JSON.stringify(error["error"]["response"]["errors"]),'',{duration:7000});  
+                      }
+        
       );
     }
   }
@@ -152,14 +161,18 @@ export class LoginRegComponent implements OnInit {
     let url = this.backend+"/reset"
 
     if(logForm.get('email').valid){
-
-      console.log('resetPassword',this.logForm.get('email').value);
-
+      //console.log('resetPassword',this.logForm.get('email').value);
       let email=this.logForm.get('email').value;
-      this.http.post(url,{email}).toPromise().then((data: any) => {
-        console.log(data);
-        this.snackBar.open('Sono state inviate all\'indirizzo email le istruzione per reimpostare la password!','',{duration:3000});
-      });
+      this.http.post(url,{email}).toPromise().then(
+        (data: any) => {
+                          console.log(data);
+                          this.snackBar.open('Sono state inviate all\'indirizzo email le istruzione per reimpostare la password!','',{duration:3000});
+                        },
+        (error: any) => {
+                          console.log(error)
+                          this.snackBar.open(JSON.stringify(error["error"]["response"]["errors"]),'',{duration:7000});
+                        }
+      );
     }
   }
 

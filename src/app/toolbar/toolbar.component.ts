@@ -26,7 +26,7 @@ export class ToolbarComponent implements OnInit {
     this.Auth.setLoggedIn(false);
     this.Auth.destroyAuthenticationToken();
     this.Auth.destroyId();
-    this.router.navigate(['/events']);
+    this.router.navigate(['/home']);
   }
 
   ngOnInit() { }

@@ -16,7 +16,7 @@ export class EventsComponent implements OnInit {
 
   cards = [
   ];
-
+  
   button_text='Partecipa';
   id_user= -1;
   isLoggedIn$: boolean;
@@ -43,7 +43,7 @@ export class EventsComponent implements OnInit {
           this.possoPremere= false;
           this.cards.forEach(card => {
             if (card.id == id) {
-              if (card.button_text==='Non Partecipare')
+              if (card.button_text==='Lascia')
               {
                 var url=this.backend+"/dispartecipa/";
                 card.button_text= 'Partecipa';
@@ -55,7 +55,7 @@ export class EventsComponent implements OnInit {
               else
               {
                 var url=this.backend+"/partecipa/";
-                card.button_text= 'Non Partecipare';
+                card.button_text= 'Lascia';
                 card.id_partecipanti.push(this.id_user);
               }
               let headers = {
@@ -125,7 +125,7 @@ export class EventsComponent implements OnInit {
         card.dateDisplay = fullDateConvert;
         //if(this.isLoggedIn$) {
         if (card.id_partecipanti.some(e => e === this.id_user)){
-            card.button_text= 'Non Partecipare';
+            card.button_text= 'Lascia';
         }
         else
         {

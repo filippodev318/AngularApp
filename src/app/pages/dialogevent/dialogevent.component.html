@@ -1,16 +1,19 @@
-<div class="dialog">
+<div class="dialog" style="width: 100%;height: 100%;">
         <h1 mat-dialog-title style="font-weight:bold;text-align: -webkit-center">{{card.name}}</h1>
         <h3 style="font-weight:bold; text-align: -webkit-center"> Partecipanti </h3>
         <ul fxLayout='row' fxLayoutWrap class="lista_partecipanti">
                 <li *ngFor="let partecipante of partecipanti; let i = index" class="item">
+                <div>
                         <mat-card-header></mat-card-header>
                         <img mat-card-image src="{{partecipante.url_image}}">
-                        <h4> {{partecipante.nome}} {{partecipante.cognome}} </h4>
+                        <h4 style="text-align: center;margin-top: -15px;"> {{partecipante.nome}} {{partecipante.cognome}} </h4>
+                </div>
                 </li>
         </ul>
 
         <div class="maps">
         <h3 style="font-weight:bold;"> Posizione </h3>
+        <div>
         <agm-map 
                 [latitude]="+card.latitudine" 
                 [longitude]="+card.longitudine">
@@ -22,6 +25,7 @@
         
                 </agm-marker>
         </agm-map>
+        </div>
         </div>
 </div>
 

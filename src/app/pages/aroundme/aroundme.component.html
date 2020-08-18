@@ -8,12 +8,6 @@
         *ngFor="let card of cards; let i = index"
         [latitude]="card.latitudine"
         [longitude]="card.longitudine"
-        [label]="card.name">
-        <agm-info-window>
-                <h2>{{card.name}}</h2>
-                <a href="http://127.0.0.1:4200/event/{{card.id}}">Details</a>
-        </agm-info-window>
-
-    
+        [label]="card.name">    
   </agm-marker>
 </agm-map>
