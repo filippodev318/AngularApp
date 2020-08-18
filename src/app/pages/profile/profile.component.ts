@@ -108,8 +108,11 @@ export class ProfileComponent implements OnInit {
             'Cache-Content-Type': 'application/json',
             'authentication_token': this.Auth.getAuthenticationToken()
           }
+        
+        //console.log("Aggiorno info")
+        //console.log(this.profileForm)
 
-        this.http.put(url,this.profileForm).toPromise().then((data: any) => {
+        this.http.put(url,{citta:this.profileForm.get("citta").value,telefono:this.profileForm.get("telefono").value},{headers:headers}).toPromise().then((data: any) => {
             console.log(data)
             this.editable = false;
             this.user.citta = this.profileForm.get("citta").value;

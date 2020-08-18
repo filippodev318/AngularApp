@@ -12,7 +12,7 @@ export class UploadService {
     private basePath: string = '/upload';
     private uploadTask: firebase.storage.UploadTask;
     public percentuale: EventEmitter<string> = new EventEmitter<string>();
-
+    backend="http://93.55.184.20:5000"
     constructor(private Auth: AuthService, private http: HttpClient, private snackBar:MatSnackBar) {  }
 
 
@@ -43,7 +43,7 @@ export class UploadService {
                     upload.url=downloadURL;
                     console.log("url: ",downloadURL,"name: ",upload.name);
                     console.log('File available at', downloadURL);
-                    that.http.put('http://localhost:5000/profile',{url_image:downloadURL},{headers:headers}
+                    that.http.put(that.backend+'/profile',{url_image:downloadURL},{headers:headers}
                         ).toPromise()
                         .then((data: any) => {
                         console.log(data);
