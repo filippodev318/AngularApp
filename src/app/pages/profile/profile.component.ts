@@ -109,7 +109,7 @@ export class ProfileComponent implements OnInit {
             'authentication_token': this.Auth.getAuthenticationToken()
           }
 
-        this.http.post(url,this.profileForm).toPromise().then((data: any) => {
+        this.http.put(url,this.profileForm).toPromise().then((data: any) => {
             console.log(data)
             this.editable = false;
             this.user.citta = this.profileForm.get("citta").value;
