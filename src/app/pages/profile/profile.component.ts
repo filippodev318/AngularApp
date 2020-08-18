@@ -101,7 +101,7 @@ export class ProfileComponent implements OnInit {
 
   updateField(){
     if(this.profileForm.valid){
-        let url = "http://127.0.0.1:5000/profile"
+        let url = this.backend+"/profile"
 
         let headers = {
             'Cache-Control': 'no-cache',
@@ -115,8 +115,6 @@ export class ProfileComponent implements OnInit {
             this.user.citta = this.profileForm.get("citta").value;
             this.user.telefono = this.profileForm.get("telefono").value;
           })
-
-          
       }
     }
 
