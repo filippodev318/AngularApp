@@ -15,11 +15,12 @@ export class AroundmeComponent implements OnInit  {
   lat: number = 40.514680;
   lng: number = 14.163612;
   cards=[]
+  backend="http://93.55.184.20:5000"
 
   constructor(private http:HttpClient) { }
 
   ngOnInit():void{
-    let url = "http://127.0.0.1:5000/events"
+    let url = this.backend+"/events"
     this.http.get(url,{
     }).toPromise().then((data: any) => {
       this.cards=data
