@@ -70,7 +70,6 @@ export class ProfileComponent implements OnInit {
         'Cache-Content-Type': 'application/json',
         'authentication_token': this.Auth.getAuthenticationToken()
       }
-      
     console.log(headers)
     this.http.get(url,{headers:headers}).toPromise()
     .then((data: any) => {

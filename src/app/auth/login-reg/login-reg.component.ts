@@ -11,7 +11,7 @@ import {AuthService} from '../../_service/auth-service';
   styleUrls: ['./login-reg.component.css']
 })
 export class LoginRegComponent implements OnInit {
-  backend="http://93.55.184.20:5000"
+  backend="http://93.55.184.20:5000/"
 
   logForm = new FormGroup({
     email:new FormControl("", [
@@ -42,10 +42,8 @@ export class LoginRegComponent implements OnInit {
       Validators.required
     ]),
     citta:new FormControl("", [
-      Validators.required
     ]),
     telefono:new FormControl("", [
-      Validators.required,
       Validators.pattern("[0-9 ]{10}")
     ])
   })
@@ -109,16 +107,16 @@ export class LoginRegComponent implements OnInit {
     this.snackBar.open('Registrazione in corso.... !!','',{duration:3000})
     this.http.post(url,regForm.value).toPromise().then(
       (data: any) => {
-                        console.log("hcndxjsmdnjs")
+                        //console.log("hcndxjsmdnjs")
                         console.log(data);
                         console.log(data["response"]);
                         console.log(data["response"]["user"]["authentication_token"]);
                         console.log(data["response"]["user"]["id"]);
                         this.snackBar.open('Registrazione avvenuta con successo !!','',{duration:2000});
-                        this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
-                        this.Auth.setId(data["response"]["user"]["id"]);
-                        this.Auth.setLoggedIn(true);
-                        this.router.navigate(['home'])
+                        //this.Auth.setAuthenticationToken(data["response"]["user"]["authentication_token"]);
+                        //this.Auth.setId(data["response"]["user"]["id"]);
+                        //this.Auth.setLoggedIn(true);
+                        this.router.navigate(['login_reg'])
                         regForm.reset();
                       },
       (error: any) => {
