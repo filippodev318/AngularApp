@@ -43,6 +43,7 @@ export class ProfileComponent implements OnInit {
   percentuale;
   caricamento;
   backend="http://93.55.184.20:5000"
+
   constructor(private Auth: AuthService, private http:HttpClient, private uploadService: UploadService) { 
     console.log('id:'+this.Auth.getId().toString())
     this.uploadService.percentuale.subscribe({
@@ -74,9 +75,9 @@ export class ProfileComponent implements OnInit {
     this.http.get(url,{headers:headers}).toPromise()
     .then((data: any) => {
       this.user=data;
-      console.log(data);
+      //console.log(data);
       console.log(this.user);
-      console.log(JSON.stringify(this.user));
+      //console.log(JSON.stringify(this.user));
       this.editable = false;
     })
 
